@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Gateway-Service  cloud:    gateway:      routes:      - id : Microservice-1
+        uri : lb://MICROSERVICE-1
+        predicates:        - Path=/Microservice-1/** 
+      default-filters:        - name: Retry
+      httpclient:        connect-timeout: 2000
+        response-timeout: 5s
+#          #            retries: 3 times
+#            series: 5XX series
+#            exceptions :  java.net.ConnectTimeoutException 
+#            methods : GET
+#            backoff : disabled
+server:  port: 4444#  error:#    whitelabel:#      enabled: true
+eureka:  client:    register-with-eureka: true
+    fetch-registry: true
+    service-url:      defaultZone : http://localhost:1111/eureka
